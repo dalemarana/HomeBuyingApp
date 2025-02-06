@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug Decision",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/home_buying_app/decision.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}
