@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  SERVER_IP: ${{ secrets.PRODUCTION_SERVER_IP }}
+  API_KEY: ${{ secrets.DEPLOY_API_KEY }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,3 +35,46 @@ jobs:
       - name: Run tests with pytest
         run: |
           pytest
+
+      # Run tests with coverage
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=home_buying_app --cov-report=xml
+      
+      # Upload coverage report
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.xml
+      
+      # # OPTIONAL: Add Code Coverage Badge
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+  
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Deploy only from main branch
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Deploy to Production
+        run: |
+          echo "Deploying application..."
+          # Add your custom deployment command here
+          # For example: scp files to server, or deploy to AWS/GCP
