@@ -10,7 +10,7 @@ from content import TOC, EXECUTIVE_SUMMARY, METHODOLOGY, DISCLAIMER
 
 use('TkAgg')
 
-REPORTS_FOLDER = "home_buying_app/Reports"
+REPORTS_FOLDER = f"{os.getcwd()}/home_buying_app/Reports"
 os.makedirs(REPORTS_FOLDER, exist_ok=True)
 
 RENTING_GRAPH_PATH = f"{REPORTS_FOLDER}/Graphs/renting_expenses.png"
@@ -26,7 +26,7 @@ def generate_graphs_and_report(data):
 
     try:
         # print(data)
-        os.makedirs("Reports/Graphs", exist_ok=True)
+        os.makedirs(f"{REPORTS_FOLDER}/Graphs", exist_ok=True)
         duration = data["expense_cost_analysis"][0]["duration"]
         years_range = range(1, duration + 1)
 
@@ -141,8 +141,8 @@ def generate_pdf_report(data):
         name = data["user_details"][0]["name"]
         last_name = name.split()[-1]
         report_date = datetime.now().strftime("%Y-%m-%d")
-        report_count = len(os.listdir("Reports"))  # Count the number of reports generated
-        report_filename = f"Reports/{last_name}_{report_date}_Report{report_count + 1}.pdf"
+        report_count = len(os.listdir(REPORTS_FOLDER))  # Count the number of reports generated
+        report_filename = f"{REPORTS_FOLDER}/{last_name}_{report_date}_Report{report_count + 1}.pdf"
         monthly_mortgage_payment = data["user_details"][2]["monthly_mortgage_payment"] / 12
 
         # Create PDF report

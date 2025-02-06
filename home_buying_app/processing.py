@@ -347,3 +347,5 @@ def present_value(yearly_values, discount_rate):
         pv += value / ((1 + (discount_rate / 100)) ** (1 + i))
     
     return pv
+
+
