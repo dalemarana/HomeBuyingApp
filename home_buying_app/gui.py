@@ -8,11 +8,7 @@ from output import generate_graphs_and_report
 from extras import country_data
 
 
-default_folder = f"{os.getcwd()}/home_buying_app"
-# Countries Data
-countries_data_path = f"{default_folder}/Country Data/countries_finance_data.txt"
-# if not os.path.exists(countries_data_path):
-#     country_data.generate_country_directory()
+DEFAULT_FOLDER = f"{os.getcwd()}/home_buying_app"
 
 # with open(countries_data_path, "r") as file:
 #     countries_data = file.read()
@@ -20,16 +16,22 @@ countries_data_path = f"{default_folder}/Country Data/countries_finance_data.txt
 # print(countries_data)
 
 # Ensure required directories exist
-REQUIRED_DIRECTORIES = ["User Input", "logs", "Instructions"]
+REQUIRED_DIRECTORIES = ["User Input", "logs", "Instructions", "Country Data"]
 for directory in REQUIRED_DIRECTORIES:
-    os.makedirs(f"{default_folder}/folders/{directory}", exist_ok=True)
+    os.makedirs(f"{DEFAULT_FOLDER}/folders/{directory}", exist_ok=True)
+
+# Countries Data
+countries_data_path = f"{DEFAULT_FOLDER}/folders/Country Data/countries_finance_data.txt"
+if not os.path.exists(countries_data_path):
+    with open(countries_data_path, "w") as file:
+        file.write(str(country_data.generate_country_directory()))
 
 # Default content for input files
 DEFAULT_INPUTS = {
-    f"{default_folder}/folders/User Input/client_details.txt": "name: John Doe\nage: 33\noccupation: Engineer\nstatus: Married\nresidence: UK",
-    f"{default_folder}/folders/User Input/financial_details.txt": "annual_income: 90000\nmonthly_income: 5200",
-    f"{default_folder}/folders/User Input/expenses.txt": "rent: 1475\nelectricity: 90\nwater: 25\ngroceries: 250\ncouncil_tax: 170\nother: 200",
-    f"{default_folder}/folders/User Input/property_details.txt": "property_value: 440000\ndeposit: 44000\nduration: 33\nsolicitor: 3250\nsurvey: 750\nfurnishings: 3000"
+    f"{DEFAULT_FOLDER}/folders/User Input/client_details.txt": "name: John Doe\nage: 33\noccupation: Engineer\nstatus: Married\nresidence: UK",
+    f"{DEFAULT_FOLDER}/folders/User Input/financial_details.txt": "annual_income: 90000\nmonthly_income: 5200",
+    f"{DEFAULT_FOLDER}/folders/User Input/expenses.txt": "rent: 1475\nelectricity: 90\nwater: 25\ngroceries: 250\ncouncil_tax: 170\nother: 200",
+    f"{DEFAULT_FOLDER}/folders/User Input/property_details.txt": "property_value: 440000\ndeposit: 44000\nduration: 33\nsolicitor: 3250\nsurvey: 750\nfurnishings: 3000"
 }
 
 # Create input files with default content if missing
@@ -43,7 +45,7 @@ USER_MANUAL = os.path.join("Instructions", "Home_Buying_Analysis_User_Manual.pdf
 
 # Configure logging
 logging.basicConfig(
-    filename=f"{default_folder}/folders/logs/home_buying.log",
+    filename=f"{DEFAULT_FOLDER}/folders/logs/home_buying.log",
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
@@ -62,10 +64,10 @@ class HomeBuyingAnalysis:
     # Reading Default Input files
     def read_input_files(self):
         try:
-            self.client_details = self.read_file(f"{default_folder}/folders/User Input/client_details.txt")
-            self.financial_details = self.read_file(f"{default_folder}/folders/User Input/financial_details.txt")
-            self.expenses = self.read_file(f"{default_folder}/folders/User Input/expenses.txt")
-            self.property_details = self.read_file(f"{default_folder}/folders/User Input/property_details.txt")
+            self.client_details = self.read_file(f"{DEFAULT_FOLDER}/folders/User Input/client_details.txt")
+            self.financial_details = self.read_file(f"{DEFAULT_FOLDER}/folders/User Input/financial_details.txt")
+            self.expenses = self.read_file(f"{DEFAULT_FOLDER}/folders/User Input/expenses.txt")
+            self.property_details = self.read_file(f"{DEFAULT_FOLDER}/folders/User Input/property_details.txt")
 
             logging.info("User input files loaded successfully.")
         except Exception as e:
