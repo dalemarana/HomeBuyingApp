@@ -35,4 +35,3 @@ tabulate==0.8.10
 tzdata==2025.1
 tzlocal==5.2
 urllib3==2.3.0
-wbdata==1.0.0
