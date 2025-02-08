@@ -1,19 +1,16 @@
 import os
 import logging
 import datetime
-
 import PySimpleGUI as sg
+
+from ast import literal_eval
 from processing import process_data
 from output import generate_graphs_and_report
 from extras import country_data
 
 
 DEFAULT_FOLDER = f"{os.getcwd()}/home_buying_app"
-
-# with open(countries_data_path, "r") as file:
-#     countries_data = file.read()
-
-# print(countries_data)
+DATA_NEEDED = ["Inflation, consumer prices (%)", "Interest Rate (%)"]
 
 # Ensure required directories exist
 REQUIRED_DIRECTORIES = ["User Input", "logs", "Instructions", "Country Data"]
@@ -21,14 +18,31 @@ for directory in REQUIRED_DIRECTORIES:
     os.makedirs(f"{DEFAULT_FOLDER}/folders/{directory}", exist_ok=True)
 
 # Countries Data
-countries_data_path = f"{DEFAULT_FOLDER}/folders/Country Data/countries_finance_data.txt"
-if not os.path.exists(countries_data_path):
-    with open(countries_data_path, "w") as file:
-        file.write(str(country_data.generate_country_directory()))
+COUNTRIES_DATA_PATH = f"{DEFAULT_FOLDER}/folders/Country Data/countries_finance_data.txt"
+COUNTRY_DATA = {}
+if not os.path.exists(COUNTRIES_DATA_PATH):
+    with open(COUNTRIES_DATA_PATH, "w") as file:
+        COUNTRY_DATA = country_data.generate_country_directory()
+        file.write(str(COUNTRY_DATA))
+else:
+    with open(COUNTRIES_DATA_PATH, "r") as file:
+        COUNTRY_DATA = literal_eval(file.read())
+
+
+# Getting the List of countries
+COUNTRY_INFLATION_INTEREST = {}
+for key in COUNTRY_DATA:
+    country_info = COUNTRY_DATA[key]
+    country_data_list = []
+    for _ in DATA_NEEDED:
+        country_data_list.append(country_info[_])
+    COUNTRY_INFLATION_INTEREST[country_info["name"]] = country_data_list
+
+COUNTRY_NAMES = list(COUNTRY_INFLATION_INTEREST.keys())
 
 # Default content for input files
 DEFAULT_INPUTS = {
-    f"{DEFAULT_FOLDER}/folders/User Input/client_details.txt": "name: John Doe\nage: 33\noccupation: Engineer\nstatus: Married\nresidence: UK",
+    f"{DEFAULT_FOLDER}/folders/User Input/client_details.txt": "name: John Doe\nage: 33\noccupation: Engineer\nstatus: Married\nresidence: United Kingdom",
     f"{DEFAULT_FOLDER}/folders/User Input/financial_details.txt": "annual_income: 90000\nmonthly_income: 5200",
     f"{DEFAULT_FOLDER}/folders/User Input/expenses.txt": "rent: 1475\nelectricity: 90\nwater: 25\ngroceries: 250\ncouncil_tax: 170\nother: 200",
     f"{DEFAULT_FOLDER}/folders/User Input/property_details.txt": "property_value: 440000\ndeposit: 44000\nduration: 33\nsolicitor: 3250\nsurvey: 750\nfurnishings: 3000"
@@ -96,7 +110,8 @@ class HomeBuyingAnalysis:
             [sg.Text("Age", size=(15,1)), sg.InputText(self.client_details.get("age", ""), key="age")],
             [sg.Text("Occupation", size=(15,1)), sg.InputText(self.client_details.get("occupation", ""), key="occupation")],
             [sg.Text("Marital Status", size=(15,1)), sg.Combo(["Single", "Married"], default_value=self.client_details.get("status", ""), key="status")],
-            [sg.Text("Current Residence", size=(15,1)), sg.InputText(self.client_details.get("residence", ""), key="residence")],
+            [sg.Text("Current Residence", size=(15,1)), sg.Combo(COUNTRY_NAMES, default_value=self.client_details.get("residence", ""), key="residence")],
+            # [sg.Text("Current Residence", size=(15,1)), sg.InputText(self.client_details.get("residence", ""), key="residence")],
         ]
 
         # Tab 2: Financial Details
