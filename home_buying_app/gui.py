@@ -10,7 +10,7 @@ from extras import country_data
 
 
 DEFAULT_FOLDER = f"{os.getcwd()}/home_buying_app"
-DATA_NEEDED = ["Inflation, consumer prices (%)", "Interest Rate (%)"]
+DATA_NEEDED = ["Inflation, consumer prices (%)", "Interest Rate (%)", "currency", "exchange_rate_to_usd"]
 
 # Ensure required directories exist
 REQUIRED_DIRECTORIES = ["User Input", "logs", "Instructions", "Country Data"]
@@ -89,6 +89,9 @@ class HomeBuyingAnalysis:
             sg.popup_error("Error loading input files. Check the 'User Input' folder.")
             exit()
 
+    # Function to add World Bank Data (Interest Rate and Inflation), Currency and Exchange Rate to Dictionary
+    # def add_to_dict()
+
     @staticmethod
     def read_file(filepath):
         data = {}
@@ -151,6 +154,11 @@ class HomeBuyingAnalysis:
             [sg.Text("Discount Rate (%)", size=(25,1)), sg.Slider(range=(0.0, 10.0), resolution=0.1, orientation="h", key="discount_rate", default_value=3.0)],    
             [sg.Text("Annual Maintenance Rate (%)", size=(25,1)), sg.Slider(range=(0.0, 10.0), resolution=0.1, orientation="h", key="maintenance_rate", default_value=1.0)],
             [sg.Text("Stock Growth Rate (%)", size=(25,1)), sg.Slider(range=(0.0, 10.0), resolution=0.1, orientation="h", key="stock_growth_rate", default_value=7.7)],
+            [sg.Text(f"Reference Data as per World Bank Data (2023): ", size=(50,1))],
+            [sg.Text(f"Consumer Price Index, Inflation:", size=(30,1)), sg.Text(key="Inflation, consumer prices (%)")],
+            [sg.Text(f"Interest Rate: ", size=(30,1)), sg.Text(key="Interest Rate (%)")],
+            [sg.Text(f"Currency: ", size=(30,1)), sg.Text(key="currency")],
+            [sg.Text(f"Exchage rate to USD: ", size=(30,1)), sg.Text(key="exchange_rate_to_usd")],
             # [sg.Button("Show Graph", size=(20,1)), sg.Button("Generate Report"), sg.Button("Calculate Again")]
         ]
 
@@ -190,6 +198,12 @@ class HomeBuyingAnalysis:
 
             # Tab Navigation
             if event.startswith("Next"):
+                for i, key in enumerate(DATA_NEEDED):
+                    values[key] = COUNTRY_INFLATION_INTEREST[values.get("residence")][i]
+                    if key in ["Inflation, consumer prices (%)", "Interest Rate (%)"] and values[key] is not None:
+                        values[key] = round(values[key], 2)
+                    window[key].update(values[key])
+                # print(f"GUI: {values}")
                 current_tab += 1
                 window[f"-TAB{current_tab}-"].update(visible=True).select()
 
@@ -211,6 +225,11 @@ class HomeBuyingAnalysis:
 
             # Generate Report
             if event == "Generate Report":
+                for i, key in enumerate(DATA_NEEDED):
+                    values[key] = COUNTRY_INFLATION_INTEREST[values.get("residence")][i]
+                    if key in ["Inflation, consumer prices (%)", "Interest Rate (%)"] and values[key] is not None:
+                        values[key] = round(values[key], 2)
+                    window[key].update(values[key])
                 processed_data = process_data(values)
                 filename = generate_graphs_and_report(processed_data)
                 sg.popup(f"Report generated: {filename}")

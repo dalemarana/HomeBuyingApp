@@ -11,13 +11,14 @@ def process_data(values):
     """Processes input values and returns structured financial data."""
 
     try:
-        # print(values)
+        # print(f"Processing: {values}")
 
         name = values.get("name", "Joe")
         age = int(values.get("age", "33"))
         occupation = values.get("occupation", "Engineer")
         status = values.get("status", "Married")
-        residence = values.get("residence", "Apartment")
+        residence = values.get("residence", "United Kingdom")
+        currency = values.get("currency")
 
         annual_income = float(values.get("annual_income", 90000))
         monthly_income = float(values.get("monthly_income", 5200))
@@ -80,6 +81,8 @@ def process_data(values):
                         "age": age,
                         "occupation": occupation,
                         "status": status,
+                        "residence": residence,
+                        "currency": currency,
                     },
                     {
                         "annual_income": annual_income,

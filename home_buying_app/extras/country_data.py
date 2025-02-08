@@ -6,7 +6,7 @@ import pandas as pd
 import requests
 
 from datetime import datetime
-from config import EXCHANGE_RATE_API_KEY
+# from config import EXCHANGE_RATE_API_KEY
 
 """
 This code uses the following APIs:

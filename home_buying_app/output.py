@@ -26,9 +26,11 @@ def generate_graphs_and_report(data):
 
     try:
         # print(data)
+        
         os.makedirs(f"{REPORTS_FOLDER}/Graphs", exist_ok=True)
         duration = data["expense_cost_analysis"][0]["duration"]
         years_range = range(1, duration + 1)
+        currency = data["user_details"][0]["currency"]
 
 
         # Rent vs Mortgage Expenses Graph
@@ -49,7 +51,7 @@ def generate_graphs_and_report(data):
         plt.bar(years_range, remaining_income_rent, bottom=[r + n + w for r, n, w in zip(rent_expenses, needs_expenses_costs, wants_expenses_costs)], label='Remaining Income', color='gold', edgecolor="black", alpha=0.7)
         plt.title("Expense Analysis: Renting Scenario")
         plt.xlabel("Year")
-        plt.ylabel("Cost (£)")
+        plt.ylabel(f"Cost ({currency})")
         # Setting the formatter for y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(comma_formatter))
         plt.legend()
@@ -65,7 +67,7 @@ def generate_graphs_and_report(data):
         plt.bar(years_range, remaining_income_mortgage, bottom=[m + n + w for m, n, w in zip(mortgage_payment, needs_expenses_costs, wants_expenses_costs)], label='Remaining Income', color='gold', edgecolor="black", alpha=0.7)
         plt.title("Expense Analysis: Homeownership Scenario")
         plt.xlabel("Year")
-        plt.ylabel("Cost (£)")
+        plt.ylabel(f"Cost ({currency})")
         # Setting the formatter for y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(comma_formatter))
         plt.legend()
@@ -86,7 +88,7 @@ def generate_graphs_and_report(data):
         plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
         plt.title("Yearly Non-Recoverable Costs: Homeownership vs Renting")
         plt.xlabel("Year")
-        plt.ylabel("Cost (£)")
+        plt.ylabel(f"Cost ({currency})")
         # Setting the formatter for y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(comma_formatter))
         plt.legend()
@@ -109,7 +111,7 @@ def generate_graphs_and_report(data):
         plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
         plt.title("Yearly Opportunity Costs: Homeownership vs Stock Market Investing")
         plt.xlabel("Year")
-        plt.ylabel("Value (£)")
+        plt.ylabel(f"Value ({currency})")
         # Setting the formatter for y-axis
         plt.gca().yaxis.set_major_formatter(FuncFormatter(comma_formatter))
         plt.legend()
@@ -144,6 +146,7 @@ def generate_pdf_report(data):
         report_count = len(os.listdir(REPORTS_FOLDER))  # Count the number of reports generated
         report_filename = f"{REPORTS_FOLDER}/{last_name}_{report_date}_Report{report_count + 1}.pdf"
         monthly_mortgage_payment = data["user_details"][2]["monthly_mortgage_payment"] / 12
+        currency = data["user_details"][0]["currency"]
 
         # Create PDF report
         pdf = FPDF()
@@ -214,6 +217,8 @@ def generate_pdf_report(data):
         pdf.cell(cell_width, cell_height, txt=f"{data["user_details"][0]["occupation"]}", ln=True)
         pdf.cell(cell_width, cell_height, "Marital Status: ", 0)
         pdf.cell(cell_width, cell_height, txt=f"{data["user_details"][0]["status"]}", ln=True)
+        pdf.cell(cell_width, cell_height, "Country of Residence: ", 0)
+        pdf.cell(cell_width, cell_height, txt=f"{data["user_details"][0]["residence"]}", ln=True)
         pdf.ln(10)
 
         # Financial details
@@ -221,9 +226,9 @@ def generate_pdf_report(data):
         pdf.cell(180, 10, "Financial Details", ln=True)
         pdf.set_font("Arial", size=12)
         pdf.cell(cell_width, cell_height, "Annual Income: ", 0)
-        pdf.cell(cell_width, cell_height, txt=f"£ {data["user_details"][1]["annual_income"]:,.2f}", ln=True)
+        pdf.cell(cell_width, cell_height, txt=f"{currency} {data["user_details"][1]["annual_income"]:,.2f}", ln=True)
         pdf.cell(cell_width, cell_height, "Monthly Income: ", 0)
-        pdf.cell(cell_width, cell_height, txt=f"£ {data["user_details"][1]["monthly_income"]:,.2f}", ln=True)
+        pdf.cell(cell_width, cell_height, txt=f"{currency} {data["user_details"][1]["monthly_income"]:,.2f}", ln=True)
         pdf.ln(10)
 
 
@@ -232,11 +237,11 @@ def generate_pdf_report(data):
         pdf.cell(180, 10, "Property Details", ln=True)
         pdf.set_font("Arial", size=12)
         pdf.cell(cell_width, cell_height, "Property Value: ")
-        pdf.cell(cell_width, cell_height, txt=f"£ {data["user_details"][2]["property_value"]:,.2f}", ln=True)
+        pdf.cell(cell_width, cell_height, txt=f"{currency} {data["user_details"][2]["property_value"]:,.2f}", ln=True)
         pdf.cell(cell_width, cell_height, "Deposit: ")
-        pdf.cell(cell_width, cell_height, txt=f"£ {data["user_details"][2]["deposit"]:,.2f}", ln=True)
+        pdf.cell(cell_width, cell_height, txt=f"{currency} {data["user_details"][2]["deposit"]:,.2f}", ln=True)
         pdf.cell(cell_width, cell_height, "Monthly Mortgage Payment:")
-        pdf.cell(cell_width, cell_height, txt=f"£ {monthly_mortgage_payment:,.2f}", ln=True)
+        pdf.cell(cell_width, cell_height, txt=f"{currency} {monthly_mortgage_payment:,.2f}", ln=True)
         pdf.cell(cell_width, cell_height, "Mortgage Rate: ")
         pdf.cell(cell_width, cell_height, txt=f"{data["user_details"][2]["mortgage_rate"]}%", ln=True)
         pdf.ln(10)
@@ -260,7 +265,6 @@ def generate_pdf_report(data):
         pdf.cell(cell_width, cell_height, txt=f"{data["user_details"][3]["stock_growth_rate"]}%", ln=True)
         pdf.ln(10)
 
-
         # Expense Analysis
         pdf.add_page()
         pdf.set_font("Arial", style="B", size=14)
@@ -283,8 +287,8 @@ def generate_pdf_report(data):
         pdf.image(OWNERSHIP_GRAPH_PATH, x=10, y=None, w=180)
 
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 6, txt=f"Accummulated Remaining Income After Rent (Present Value): £ {remaining_income_rent_pv:,.2f}", ln=True)
-        pdf.cell(200, 6, txt=f"Accummulated Remaining Income After Mortgage (Present Value): £ {remaining_income_mortgage_pv:,.2f}", ln=True)
+        pdf.cell(200, 6, txt=f"Accummulated Remaining Income After Rent (Present Value): {currency} {remaining_income_rent_pv:,.2f}", ln=True)
+        pdf.cell(200, 6, txt=f"Accummulated Remaining Income After Mortgage (Present Value): {currency} {remaining_income_mortgage_pv:,.2f}", ln=True)
         pdf.ln(5)
 
         remaining_income_difference = remaining_income_rent_pv - remaining_income_mortgage_pv
@@ -297,7 +301,7 @@ def generate_pdf_report(data):
         else:
             remaining_title = "Equal"
 
-        expense_summary = f"""{remaining_title} is more cost effective with present value difference of £ {abs(remaining_income_difference):,.2f}."""
+        expense_summary = f"""{remaining_title} is more cost effective with present value difference of {currency} {abs(remaining_income_difference):,.2f}."""
         pdf.cell(200, 8, expense_summary, ln=True)
         pdf.ln(10)
 
@@ -306,22 +310,22 @@ def generate_pdf_report(data):
         pdf.set_font("Arial", style="B", size=12)
         col_width = 210 / 4.5
         row_height = pdf.font_size * 1.3
-        pdf.cell(col_width, row_height, "Year", 1, align="C")
-        pdf.cell(col_width, row_height, "Rent Cost \n(£)", 1, align="C")
-        pdf.cell(col_width, row_height, "Income - Rent (£)", 1, align="C")
+        pdf.cell(col_width * 0.6, row_height, "Year", 1, align="C")
+        pdf.cell(col_width * 1.1, row_height, f"Rent Cost \n({currency})", 1, align="C")
+        pdf.cell(col_width * 1.1, row_height, f"Income - Rent ({currency})", 1, align="C")
         # pdf.cell(40, 8, "Mortgage Cost (£)", 1, align="C")
-        pdf.cell(col_width, row_height, "Income - Morgage (£)", 1, align="C", ln=True)
+        pdf.cell(col_width * 1.1, row_height, f"Income - Morgage ({currency})", 1, align="C", ln=True)
 
         # Add yearly values to table
         pdf.set_font("Arial", size=12)
         col_width = 210 / 4.5
         row_height = pdf.font_size * 1.3
         for year in range(years):
-            pdf.cell(col_width, row_height, str(year + 1), 1, align="C")
-            pdf.cell(col_width, row_height, f"£ {rent_expenses[year]:,.2f}", 1, align="R")
-            pdf.cell(col_width, row_height, f"£ {remaining_income_rent[year]:,.2f}", 1, align="R")
+            pdf.cell(col_width * 0.6, row_height, str(year + 1), 1, align="C")
+            pdf.cell(col_width * 1.1, row_height, f"{rent_expenses[year]:,.2f}", 1, align="R")
+            pdf.cell(col_width * 1.1, row_height, f"{remaining_income_rent[year]:,.2f}", 1, align="R")
             # pdf.cell(40, 8, f"£ {mortgage_expenses[year]:,.2f}", 1, align="R")
-            pdf.cell(col_width, row_height, f"£ {remaining_income_mortgage[year]:,.2f}", 1, align="R", ln=True)
+            pdf.cell(col_width * 1.1, row_height, f"{remaining_income_mortgage[year]:,.2f}", 1, align="R", ln=True)
 
 
         # Non-Recoverable Costs
@@ -341,8 +345,8 @@ def generate_pdf_report(data):
         pdf.ln(5)
         pdf.image(NON_RECOVERABLE_COSTS_GRAPH_PATH, x=10, y=None, w=180)
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 6, txt=f"Accummulated Non-Recoverable Cost - Rent (Present Value): £ {renting_costs_pv:,.2f}", ln=True)
-        pdf.cell(200, 6, txt=f"Accummulated Non-Recoverable Cost - Mortgage (Present Value): £ {homeownership_costs_pv:,.2f}", ln=True)
+        pdf.cell(200, 6, txt=f"Accummulated Non-Recoverable Cost - Rent (Present Value): {currency} {renting_costs_pv:,.2f}", ln=True)
+        pdf.cell(200, 6, txt=f"Accummulated Non-Recoverable Cost - Mortgage (Present Value): {currency} {homeownership_costs_pv:,.2f}", ln=True)
 
         nrc_difference_pv = homeownership_costs_pv - renting_costs_pv
         remaining_title_1 = ""
@@ -353,7 +357,7 @@ def generate_pdf_report(data):
         else:
             remaining_title_1 = "Equal"
 
-        non_recoverable_summary = f"""{remaining_title_1} is more cost effective with present value difference (cheaper) of £ {abs(nrc_difference_pv):,.2f}."""
+        non_recoverable_summary = f"""{remaining_title_1} is more cost effective with present value difference (cheaper) of {currency} {abs(nrc_difference_pv):,.2f}."""
         pdf.cell(200, 8, non_recoverable_summary, ln=True)
         pdf.ln(10)
 
@@ -363,18 +367,18 @@ def generate_pdf_report(data):
         pdf.set_font("Arial", style="B", size=12)
         col_width = 210 / 3.3
         row_height = pdf.font_size * 1.3
-        pdf.cell(col_width, row_height, "Year", 1, align="C")
-        pdf.cell(col_width, row_height, "Homeownership \nCost (£)", 1, align="C")
-        pdf.cell(col_width, row_height, "Rent Cost \n(£)", 1, align="C", ln=True)
+        pdf.cell(col_width * 0.7, row_height, "Year", 1, align="C")
+        pdf.cell(col_width * 1.1, row_height, f"Homeownership \nCost ({currency})", 1, align="C")
+        pdf.cell(col_width * 1.1, row_height, f"Rent Cost \n({currency})", 1, align="C", ln=True)
 
         # # Add yearly values to table
         pdf.set_font("Arial", size=12)
         col_width = 210 / 3.3
         row_height = pdf.font_size * 1.3
         for year in range(years):
-            pdf.cell(col_width, row_height, str(year + 1), 1, align="C")
-            pdf.cell(col_width, row_height, f"£ {homeownership_costs[year]:,.2f}", 1, align="R")
-            pdf.cell(col_width, row_height, f"£ {renting_costs[year]:,.2f}", 1, ln=True, align="R")
+            pdf.cell(col_width * 0.7, row_height, str(year + 1), 1, align="C")
+            pdf.cell(col_width * 1.1, row_height, f"{homeownership_costs[year]:,.2f}", 1, align="R")
+            pdf.cell(col_width * 1.1, row_height, f"{renting_costs[year]:,.2f}", 1, ln=True, align="R")
        
 
         # Opportunity Cost
@@ -403,9 +407,9 @@ def generate_pdf_report(data):
             remaining_title_2 = "Equal"
 
         pdf.set_font("Arial", size=12)
-        pdf.cell(200, 6, txt=f"Accummulated Home Equity (Present Value): £ {home_equity_pv:,.2f}", ln=True)
-        pdf.cell(200, 6, txt=f"Accummulated Stock Investment (Present Value): £ {stock_investment_pv:,.2f}", ln=True)
-        opportunity_cost_summary = f"""{remaining_title_2} is will provide higher valuation present value difference of £ {abs(oc_difference_pv):,.2f}."""
+        pdf.cell(200, 6, txt=f"Accummulated Home Equity (Present Value): {currency} {home_equity_pv:,.2f}", ln=True)
+        pdf.cell(200, 6, txt=f"Accummulated Stock Investment (Present Value): {currency} {stock_investment_pv:,.2f}", ln=True)
+        opportunity_cost_summary = f"""{remaining_title_2} is will provide higher valuation present value difference of {currency} {abs(oc_difference_pv):,.2f}."""
         pdf.cell(200, 8, opportunity_cost_summary, ln=True)
 
 
@@ -417,18 +421,18 @@ def generate_pdf_report(data):
         pdf.set_font("Arial", style="B", size=12)
         col_width = 210 / 3.3
         row_height = pdf.font_size * 1.3
-        pdf.cell(col_width, row_height, "Year", 1, align="C")
-        pdf.cell(col_width, row_height, "Home Equity", 1, align="C")
-        pdf.cell(col_width, row_height, "Stock Investment", 1, align="C", ln=True)
+        pdf.cell(col_width * 0.8, row_height, "Year", 1, align="C")
+        pdf.cell(col_width, row_height, f"Home Equity ({currency})", 1, align="C")
+        pdf.cell(col_width, row_height, f"Stock Investment ({currency})", 1, align="C", ln=True)
 
         # Calculate yearly equity and investment values
         pdf.set_font("Arial", size=12)
         col_width = 210 / 3.3
         row_height = pdf.font_size * 1.3
         for year in range(years):
-            pdf.cell(col_width, row_height, str(year + 1), 1, align="C")
-            pdf.cell(col_width, row_height, f"£ {home_equity_growth[year]:,.2f}", 1, align="R")
-            pdf.cell(col_width, row_height, f"£ {stock_investment_growth[year]:,.2f}", 1, align="R", ln=True)
+            pdf.cell(col_width * 0.8, row_height, str(year + 1), 1, align="C")
+            pdf.cell(col_width, row_height, f"{home_equity_growth[year]:,.2f}", 1, align="R")
+            pdf.cell(col_width, row_height, f"{stock_investment_growth[year]:,.2f}", 1, align="R", ln=True)
 
 
         # Add Conclusion
@@ -440,7 +444,7 @@ def generate_pdf_report(data):
             "Non-Recoverable Cost Analysis (Expense)": (renting_costs_pv, homeownership_costs_pv),
             "Opportunity Cost": (stock_investment_pv, home_equity_pv)
         }
-        conclusion_graph = generate_conclusion_graphs(conclusion_data)
+        conclusion_graph = generate_conclusion_graphs(data, conclusion_data)
 
         conclusion = generate_conclusion(data)
 
@@ -454,29 +458,29 @@ def generate_pdf_report(data):
 
         pdf.cell(200, row_height, "Expense Analysis", align="L", ln=True)
         pdf.cell(col_width, row_height, "Acc. Remaining Income - Rent", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {remaining_income_rent_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {remaining_income_rent_pv:,.2f}", 1, align="L", ln=True)
         pdf.cell(col_width, row_height, "Acc. Remaining Income - Homeownership", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {remaining_income_mortgage_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {remaining_income_mortgage_pv:,.2f}", 1, align="L", ln=True)
         pdf.cell(col_width, row_height, "Difference", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {remaining_income_difference:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {remaining_income_difference:,.2f}", 1, align="L", ln=True)
         pdf.ln(5)
 
         pdf.cell(200, row_height, "Non-Recoverable Cost Analysis", align="L", ln=True)
         pdf.cell(col_width, row_height, "Non-Recoverable Cost - Rent", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {renting_costs_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {renting_costs_pv:,.2f}", 1, align="L", ln=True)
         pdf.cell(col_width, row_height, "Non-Recoverable Cost - Homeownership", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {homeownership_costs_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {homeownership_costs_pv:,.2f}", 1, align="L", ln=True)
         pdf.cell(col_width, row_height, "Difference", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {nrc_difference_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {nrc_difference_pv:,.2f}", 1, align="L", ln=True)
         pdf.ln(5)
 
         pdf.cell(200, row_height, "Opportunity Cost", align="L", ln=True)
         pdf.cell(col_width, row_height, "Accummulated Stock Investment", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {stock_investment_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {stock_investment_pv:,.2f}", 1, align="L", ln=True)
         pdf.cell(col_width, row_height, "Accummulated Home Equity", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {home_equity_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {home_equity_pv:,.2f}", 1, align="L", ln=True)
         pdf.cell(col_width, row_height, "Difference", 1, align="L")
-        pdf.cell(col_width, row_height, f"£ {oc_difference_pv:,.2f}", 1, align="L", ln=True)
+        pdf.cell(col_width, row_height, f"{currency} {oc_difference_pv:,.2f}", 1, align="L", ln=True)
         pdf.ln(15)
 
         pdf.image(conclusion_graph, x=10, y=None, w=180)
@@ -518,6 +522,8 @@ def generate_conclusion(data):
     """
     Generate a detailed conclusion with analysis of non-recoverable costs and opportunity costs.
     """
+    currency = data["user_details"][0]["currency"]
+
     conclusion = []
 
     # Expense Analysis
@@ -527,9 +533,9 @@ def generate_conclusion(data):
     remaining_income_difference = remaining_income_rent_pv - remaining_income_mortgage_pv
     conclusion.append("Expense Analysis:")
     if remaining_income_difference > 0:
-        conclusion.append(f"Renting provides better spending space with accummulated present value spending space difference of £ {abs(remaining_income_difference):,.2f}.")
+        conclusion.append(f"Renting provides better spending space with accummulated present value spending space difference of {currency} {abs(remaining_income_difference):,.2f}.")
     else:
-        conclusion.append(f"Homeownership provides better spending space with accummulated present value spending space difference of £ {abs(remaining_income_difference):,.2f}.")
+        conclusion.append(f"Homeownership provides better spending space with accummulated present value spending space difference of {currency} {abs(remaining_income_difference):,.2f}.")
 
     # Non-Recoverable Cost Analysis
     homeownership_costs = data["non_recoverable_costs"][0]["homeownership_costs"]
@@ -538,9 +544,9 @@ def generate_conclusion(data):
 
     conclusion.append("\n\nNon-Recoverable Costs:")
     if nonrecoverable_cost_difference > 0:
-        conclusion.append(f"Renting is more cost-effective over the analysis period, with a present value savings of £ {abs(nonrecoverable_cost_difference):,.2f}.")
+        conclusion.append(f"Renting is more cost-effective over the analysis period, with a present value savings of {currency} {abs(nonrecoverable_cost_difference):,.2f}.")
     else:
-        conclusion.append(f"Homeownership is more cost-effective over the analysis period, with a present value savings of £ {abs(nonrecoverable_cost_difference):,.2f}.")
+        conclusion.append(f"Homeownership is more cost-effective over the analysis period, with a present value savings of {currency} {abs(nonrecoverable_cost_difference):,.2f}.")
 
     # Opportunity Cost Analysis
     home_equity_growth = data["opportunity_costs"][0]["home_equity_growth"]
@@ -549,9 +555,9 @@ def generate_conclusion(data):
 
     conclusion.append("\n\nOpportunity Costs:")
     if opportunity_cost_difference < 0:
-        conclusion.append(f"Investing in the stock market offers better financial growth, with a present value advantage of £ {abs(opportunity_cost_difference):,.2f}.")
+        conclusion.append(f"Investing in the stock market offers better financial growth, with a present value advantage of {currency} {abs(opportunity_cost_difference):,.2f}.")
     else:
-        conclusion.append(f"Homeownership equity growth outperforms stock investments, with a present value advantage of £ {abs(opportunity_cost_difference):,.2f}.")
+        conclusion.append(f"Homeownership equity growth outperforms stock investments, with a present value advantage of {currency} {abs(opportunity_cost_difference):,.2f}.")
 
     # Final Recommendation
     conclusion.append("\n\n\nRecommendation:")
@@ -565,8 +571,9 @@ def generate_conclusion(data):
     return "\n".join(conclusion)
 
 
-def generate_conclusion_graphs(conclusion_data):
+def generate_conclusion_graphs(data, conclusion_data):
     # print(conclusion_data)
+    currency = data["user_details"][0]["currency"]
 
     group = ["Rent", "Homeownership"]
     data = conclusion_data
@@ -586,7 +593,7 @@ def generate_conclusion_graphs(conclusion_data):
         multiplier += 1
 
     # Add some text for labels, title, and custom x-axis tick labels, etc.
-    ax.set_ylabel("Value (£)")
+    ax.set_ylabel(f"Value ({currency})")
     ax.set_title("Renting vs Homeownership")
     ax.set_xticks(x + width, group)
     # Setting the formatter for y-axis
