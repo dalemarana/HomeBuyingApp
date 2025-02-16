@@ -183,11 +183,16 @@ class HomeBuyingAnalysis:
         ]
 
 
-        window = sg.Window("Rent vs Buy Calculator", layout, finalize=True)
+        return sg.Window("Rent vs Buy Calculator", layout, finalize=True)
 
-    # def run_gui(self):
-    #     window = self.create_gui()
-        current_tab = 0
+    
+
+    def run_gui(self):
+
+        self.window = self.create_gui()
+        window = self.window
+
+        current_tab = 1
 
         while True:
             event, values = window.read()
@@ -196,17 +201,35 @@ class HomeBuyingAnalysis:
                 if sg.popup_yes_no("Do you really want to exit?") == "Yes":
                     break
 
+            # # Tab Navigation
+            # if event.startswith("Next"):
+            #     for i, key in enumerate(DATA_NEEDED):
+            #         values[key] = COUNTRY_INFLATION_INTEREST[values.get("residence")][i]
+            #         if key in ["Inflation, consumer prices (%)", "Interest Rate (%)"] and values[key] is not None:
+            #             values[key] = round(values[key], 2)
+            #         window[key].update(values[key])
+            #     # print(f"GUI: {values}")
+            #     current_tab += 1
+            #     window[f"-TAB{current_tab}-"].update(visible=True).select()
+
+
             # Tab Navigation
-            if event.startswith("Next"):
+            if event == "Next":
                 for i, key in enumerate(DATA_NEEDED):
-                    values[key] = COUNTRY_INFLATION_INTEREST[values.get("residence")][i]
+                    values[key] = COUNTRY_INFLATION_INTEREST.get(values.get("residence"), [None] * len(DATA_NEEDED))[i]
                     if key in ["Inflation, consumer prices (%)", "Interest Rate (%)"] and values[key] is not None:
                         values[key] = round(values[key], 2)
                     window[key].update(values[key])
-                # print(f"GUI: {values}")
-                current_tab += 1
-                window[f"-TAB{current_tab}-"].update(visible=True).select()
 
+                if current_tab < 6:  # Prevent out-of-range errors
+                    # window[f"-TAB{current_tab}-"].update(visible=False)
+                    print(f"TAB{current_tab}")
+                    window[f"-TAB{current_tab}-"].update(visible=True)
+                    window["TabGroup"].Widget.select(current_tab)  # ✅ Correct tab selection
+                    current_tab += 1
+
+
+                    
             if event.startswith("Back"):
                 current_tab -= 1
                 window[f"Tab{current_tab}"].update(visible=True).select()
@@ -240,10 +263,11 @@ class HomeBuyingAnalysis:
                 window.close()
                 self.create_gui()
 
-        window.close()
+        self.window.close()
 
 
 if __name__ == "__main__":
     app = HomeBuyingAnalysis()
     app.read_input_files()
-    app.create_gui()
+    # app.create_gui()
+    app.run_gui()
