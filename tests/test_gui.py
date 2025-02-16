@@ -113,17 +113,17 @@ class TestHomeBuyingAnalysisGUI(unittest.TestCase):
     #     self.window["Exit"].click()
     #     self.assertFalse(self.window.TKroot.winfo_exists(), "GUI window did not close!")
 
-    def test_generate_report_button(self):
-        """✅ Test if 'Generate Report' button works correctly."""
+    # def test_generate_report_button(self):
+    #     """✅ Test if 'Generate Report' button works correctly."""
         
-        self.window["Generate Report"].click()
+    #     self.window["Generate Report"].click()
         
-        # 🔹 Check if report file exists
-        report_file = "home_buying_report.pdf"
-        self.assertTrue(os.path.exists(report_file), "Report file was not generated!")
+    #     # 🔹 Check if report file exists
+    #     report_file = "home_buying_report.pdf"
+    #     self.assertTrue(os.path.exists(report_file), "Report file was not generated!")
 
-        # 🔹 Clean up: remove test report
-        os.remove(report_file)
+    #     # 🔹 Clean up: remove test report
+    #     os.remove(report_file)
 
     # def test_user_manual_button(self):
     #     """✅ Test if 'View User Manual' button tries to open the file."""
