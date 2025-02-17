@@ -59,6 +59,8 @@ jobs:
 
       # Run tests with coverage
       - name: Run tests with coverage
+        env:
+          PYTHONPATH: ${{ github.workspace }}/src
         run: |
           pytest --cov=home_buying_app --cov-report=xml
       
@@ -68,6 +70,13 @@ jobs:
         with:
           name: coverage-report
           path: coverage.xml
+
+      # Step 6: Add diagnostics to check environment
+      - name: Print Python version
+        run: python --version
+
+      - name: Check installed packages
+        run: pip list
       
       # # OPTIONAL: Add Code Coverage Badge
       - name: Upload coverage to Codecov
