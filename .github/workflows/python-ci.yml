@@ -32,6 +32,24 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements_dev.txt
 
+      # Add diagnostics to check environment
+      - name: Print Python version
+        run: python --version
+
+      - name: Check installed packages
+        run: pip list
+
+      - name: Verify PYTHONPATH
+        run: echo $PYTHONPATH
+
+      # Debug step to print the working directory
+      - name: Print working directory
+        run: pwd
+
+      # Step to verify the content of the src directory
+      - name: List src directory content
+        run: ls -R 
+
       # Step 4: Run tests
       - name: Run tests with pytest
         run: |
