@@ -6,7 +6,7 @@ import os
 import requests
 
 from datetime import datetime
-from config import EXCHANGE_RATE_API_KEY
+from home_buying_app.config import EXCHANGE_RATE_API_KEY
 
 """
 This code uses the following APIs:

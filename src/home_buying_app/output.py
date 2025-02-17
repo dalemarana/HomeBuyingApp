@@ -6,7 +6,7 @@ import os
 import logging
 from fpdf import FPDF
 from datetime import datetime
-from content import TOC, EXECUTIVE_SUMMARY, METHODOLOGY, DISCLAIMER
+from home_buying_app.content import TOC, EXECUTIVE_SUMMARY, METHODOLOGY, DISCLAIMER
 
 use('TkAgg')
 

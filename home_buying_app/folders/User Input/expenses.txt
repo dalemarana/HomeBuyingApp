@@ -1,0 +1,6 @@
+rent: 1475
+electricity: 90
+water: 25
+groceries: 250
+council_tax: 170
+other: 200

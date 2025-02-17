@@ -1,0 +1,2 @@
+annual_income: 90000
+monthly_income: 5200

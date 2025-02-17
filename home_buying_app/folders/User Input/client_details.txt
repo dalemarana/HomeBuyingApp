@@ -1,0 +1,5 @@
+name: John Doe
+age: 33
+occupation: Engineer
+status: Married
+residence: United Kingdom

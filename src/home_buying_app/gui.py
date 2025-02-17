@@ -4,9 +4,9 @@ import datetime
 import PySimpleGUI as sg
 
 from ast import literal_eval
-from processing import process_data
-from output import generate_graphs_and_report
-from extras import country_data
+from home_buying_app.processing import process_data
+from home_buying_app.output import generate_graphs_and_report
+from home_buying_app.extras import country_data
 
 
 DEFAULT_FOLDER = f"{os.getcwd()}/home_buying_app"

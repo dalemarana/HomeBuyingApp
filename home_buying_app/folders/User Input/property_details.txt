@@ -1,0 +1,6 @@
+property_value: 440000
+deposit: 44000
+duration: 33
+solicitor: 3250
+survey: 750
+furnishings: 3000
