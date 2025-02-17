@@ -5,7 +5,7 @@
             "name": "Python: Debug Decision",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/home_buying_app/decision.py",
+            "program": "${workspaceFolder}/src/home_buying_app/decision.py",
             "console": "integratedTerminal"
         }
     ]
