@@ -1,0 +1,63 @@
+Metadata-Version: 2.2
+Name: home_buying_app
+Version: 0.0.0
+Summary: Provides idea if user are able to buy a home based on current financial data
+Author: Dale Marana
+License: MIT
+Platform: unix
+Platform: linux
+Platform: osx
+Platform: cygwin
+Platform: win32
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.13
+License-File: LICENSE
+Requires-Dist: appdirs==1.4.4
+Requires-Dist: backoff==2.2.1
+Requires-Dist: cachetools==5.5.1
+Requires-Dist: certifi==2025.1.31
+Requires-Dist: charset-normalizer==3.4.1
+Requires-Dist: contourpy==1.3.1
+Requires-Dist: coverage==7.6.10
+Requires-Dist: cycler==0.12.1
+Requires-Dist: dateparser==1.2.1
+Requires-Dist: decorator==5.1.1
+Requires-Dist: fonttools==4.55.8
+Requires-Dist: fpdf==1.7.2
+Requires-Dist: idna==3.10
+Requires-Dist: iniconfig==2.0.0
+Requires-Dist: kiwisolver==1.4.8
+Requires-Dist: matplotlib==3.10.0
+Requires-Dist: numpy==2.2.2
+Requires-Dist: packaging==24.2
+Requires-Dist: pandas==2.2.3
+Requires-Dist: pillow==11.1.0
+Requires-Dist: pluggy==1.5.0
+Requires-Dist: pyasn1==0.6.1
+Requires-Dist: pyparsing==3.2.1
+Requires-Dist: PySimpleGUI==5.0.8
+Requires-Dist: pytest==8.3.4
+Requires-Dist: pytest-cov==6.0.0
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: pytz==2025.1
+Requires-Dist: regex==2024.11.6
+Requires-Dist: requests==2.32.3
+Requires-Dist: rsa==4.9
+Requires-Dist: shelved-cache==0.3.1
+Requires-Dist: six==1.17.0
+Requires-Dist: tabulate==0.8.10
+Requires-Dist: tzdata==2025.1
+Requires-Dist: tzlocal==5.2
+Requires-Dist: urllib3==2.3.0
+Provides-Extra: testing
+Requires-Dist: flake8==7.1.2; extra == "testing"
+Requires-Dist: tox==4.24.1; extra == "testing"
+Requires-Dist: pytest==8.3.4; extra == "testing"
+Requires-Dist: pytest-cov==6.0.0; extra == "testing"
+Requires-Dist: mypy==1.15.0; extra == "testing"

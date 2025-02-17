@@ -22,6 +22,8 @@ pluggy==1.5.0
 pyasn1==0.6.1
 pyparsing==3.2.1
 PySimpleGUI==5.0.8
+pytest==8.3.4
+pytest-cov==6.0.0
 python-dateutil==2.9.0.post0
 pytz==2025.1
 regex==2024.11.6
@@ -33,3 +35,10 @@ tabulate==0.8.10
 tzdata==2025.1
 tzlocal==5.2
 urllib3==2.3.0
+
+[testing]
+flake8==7.1.2
+tox==4.24.1
+pytest==8.3.4
+pytest-cov==6.0.0
+mypy==1.15.0

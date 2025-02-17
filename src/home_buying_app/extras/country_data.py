@@ -1,12 +1,12 @@
-import json
-import logging
-import numpy as np
+# import json
+# import logging
+# import numpy as np
 import os
-import pandas as pd
+# import pandas as pd
 import requests
 
 from datetime import datetime
-# from config import EXCHANGE_RATE_API_KEY
+from config import EXCHANGE_RATE_API_KEY
 
 """
 This code uses the following APIs:
@@ -37,11 +37,11 @@ INDICATORS = {
 
 def generate_country_directory():
 
+
     # os.makedirs(OUTPUT_FOLDER, exist_ok=True)
     # countries_finance = "countries_finance_data.txt" 
     # file_path = f"{CURRENT_DIR}/{OUTPUT_FOLDER}/{countries_finance}"
     
-
     # Set the date range
     start_date = datetime(1974, 1, 1)
     end_date = datetime(2023, 1, 1)

@@ -223,7 +223,7 @@ class HomeBuyingAnalysis:
 
                 if current_tab < 6:  # Prevent out-of-range errors
                     # window[f"-TAB{current_tab}-"].update(visible=False)
-                    print(f"TAB{current_tab}")
+                    # print(f"TAB{current_tab}")
                     window[f"-TAB{current_tab}-"].update(visible=True)
                     window["TabGroup"].Widget.select(current_tab)  # ✅ Correct tab selection
                     current_tab += 1
@@ -234,12 +234,12 @@ class HomeBuyingAnalysis:
                 current_tab -= 1
                 window[f"Tab{current_tab}"].update(visible=True).select()
 
-            if event == "View User Manual":
-                if os.path.exists(USER_MANUAL):
-                    print("Opening user manual...")
-                    os.startfile(USER_MANUAL)
-                else:
-                    sg.popup_error("User Manual not found. Please contact support.")
+            # if event == "View User Manual":
+            #     if os.path.exists(USER_MANUAL):
+            #         print("Opening user manual...")
+            #         os.startfile(USER_MANUAL)
+            #     else:
+            #         sg.popup_error("User Manual not found. Please contact support.")
 
 
             # Show Graph

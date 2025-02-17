@@ -1,0 +1,25 @@
+Metadata-Version: 2.2
+Name: home_buying_app
+Version: 0.1
+Summary: Provides idea if user are able to buy a home based on current financial data
+Author: Dale Marana
+License: MIT
+Platform: unix
+Platform: linux
+Platform: osx
+Platform: cygwin
+Platform: win32
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+License-File: LICENSE
+Provides-Extra: testing
+Requires-Dist: flake8==7.1.2; extra == "testing"
+Requires-Dist: tox==4.24.1; extra == "testing"
+Requires-Dist: pytest==8.3.4; extra == "testing"
+Requires-Dist: pytest-cov==6.0.0; extra == "testing"
+Requires-Dist: mypy==1.15.0; extra == "testing"
