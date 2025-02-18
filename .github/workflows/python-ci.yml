@@ -55,7 +55,7 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/src
         run: |
-          pytest
+          pytest -v
 
       # Run tests with coverage
       - name: Run tests with coverage
