@@ -40,15 +40,15 @@ def test_gui_initialization(gui_app, prefilled_data):
     # Ensure first tab is active
     assert gui_app["-TAB1-"].visible, "❌ First tab is not visible on startup!"
 
-#     # Check all expected fields exist in the GUI
-#     for key, expected_value in prefilled_data.items():
-#         assert key in gui_app.AllKeysDict, f"❌ Expected input field '{key}' not found in GUI!"
+    # # Check all expected fields exist in the GUI
+    # for key, expected_value in prefilled_data.items():
+    #     assert key in gui_app.AllKeysDict, f"❌ Expected input field '{key}' not found in GUI!"
         
-#         # Check if the initial value is set correctly
-#         gui_value = gui_app[key].get()
-#         assert gui_value == expected_value, f"❌ Field '{key}' did not initialize correctly! Expected: '{expected_value}', Got: '{gui_value}'"
+    #     # Check if the initial value is set correctly
+    #     gui_value = gui_app[key].get()
+    #     assert gui_value == expected_value, f"❌ Field '{key}' did not initialize correctly! Expected: '{expected_value}', Got: '{gui_value}'"
     
-#     print("✅ GUI initialization test passed!")
+    # print("✅ GUI initialization test passed!")
 
 # @pytest.mark.parametrize("tab_index", range(1, 6))
 # def test_button_next_tab(gui_app, tab_index):
