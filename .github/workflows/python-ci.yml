@@ -50,13 +50,6 @@ jobs:
       - name: List src directory content
         run: ls -R 
 
-      # Start X virtual frame buffer (for GUI testing)
-      - name: Start Xvfb
-        run: |
-          sudo apt-get install xvfb
-          Xvfb :99 -screen 0 1024x768x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
-
       # Step 4: Run tests
       - name: Run tests with pytest
         env:

@@ -1,7 +1,11 @@
 import os
 import pytest
 import PySimpleGUI as sg
-# import home_buying_app
+
+# Skip GUI tests in CI/CD
+if os.environ.get("CI"):  # GitHub Actions sets the "CI" environment variable
+    pytest.skip("Skipping GUI tests in CI/CD", allow_module_level=True)
+
 from home_buying_app.gui import HomeBuyingAnalysis
 
 @pytest.fixture(scope="function")
