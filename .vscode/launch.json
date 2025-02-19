@@ -1,11 +1,30 @@
+// {
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "Python: Debug Decision",
+//             "type": "python",
+//             "request": "launch",
+//             "program": "${workspaceFolder}/src/home_buying_app/decision.py",
+//             "console": "integratedTerminal"
+//         }
+//     ]
+// }
 {
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Debug Decision",
+            "name": "Python: Test with Pytest",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/home_buying_app/decision.py",
+            "module": "pytest",
+            "args": [
+                "-v"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            },
+            "python": "${workspaceFolder}/venv/bin/python",
             "console": "integratedTerminal"
         }
     ]
