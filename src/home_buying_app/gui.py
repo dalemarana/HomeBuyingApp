@@ -221,12 +221,22 @@ class HomeBuyingAnalysis:
                         values[key] = round(values[key], 2)
                     window[key].update(values[key])
 
-                if current_tab < 6:  # Prevent out-of-range errors
-                    # window[f"-TAB{current_tab}-"].update(visible=False)
-                    # print(f"TAB{current_tab}")
-                    window[f"-TAB{current_tab}-"].update(visible=True)
-                    window["TabGroup"].Widget.select(current_tab)  # ✅ Correct tab selection
-                    current_tab += 1
+                # tab_keys = ["-TAB1-", "-TAB2-", "-TAB3-", "-TAB4-", "-TAB5-"]
+                # current_tab = window["TabGroup"].get()
+                # print(current_tab)
+
+                try:
+                    if current_tab < 6:  # Prevent out-of-range errors
+                        window[f"-TAB{current_tab}-"].update(visible=True)
+                        window["TabGroup"].Widget.select(current_tab)  # ✅ Correct tab selection
+                        current_tab += 1
+                except IndexError:
+                    print("Already on last tab!")  # No next tab available
+
+                # if current_tab < 6:  # Prevent out-of-range errors
+                #     window[f"-TAB{current_tab}-"].update(visible=True)
+                #     window["TabGroup"].Widget.select(current_tab)  # ✅ Correct tab selection
+                #     current_tab += 1
 
 
                     
