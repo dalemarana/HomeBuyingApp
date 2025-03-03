@@ -25,6 +25,10 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Set MPLBACKEND to Agg for headless rendering
+        run: |
+          export MPLBACKEND=Agg
+          
       # Step 3: Install dependencies
       - name: Install dependencies
         run: |
