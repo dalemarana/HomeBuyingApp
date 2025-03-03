@@ -1,8 +1,12 @@
 import pytest
 import numpy as np
 import os
+import matplotlib
 import matplotlib.pyplot as plt
 from output import generate_conclusion, generate_conclusion_graphs, comma_formatter
+
+# Force the 'Agg' backend to avoid errors in headless environments
+matplotlib.use('Agg')
 
 @pytest.fixture
 def sample_data():
