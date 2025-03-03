@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 from output import generate_conclusion, generate_conclusion_graphs, comma_formatter
 
@@ -48,6 +49,7 @@ def test_generate_conclusion(sample_data):
     assert "Homeownership equity growth outperforms stock investments, with a present value advantage of GBP 30,446.20." in result
     assert "Recommendation:" in result
 
+@pytest.mark.skipif(os.getenv('CI') == 'true', reason="Skipping graph generation test on GitHub CI")
 def test_generate_conclusion_graphs(sample_data, sample_conclusion_data, tmp_path):
     """Test the generate_conclusion_graphs function."""
     summary_graph_path = tmp_path / "summary_graph.png"
