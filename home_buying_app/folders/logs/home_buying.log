@@ -69,3 +69,10 @@
 2025-02-21 10:28:33,203 - INFO - Opportunity Costs graph generated successfully!
 2025-02-21 10:28:34,189 - INFO - Summary graph generated successfully!
 2025-02-21 10:28:34,539 - INFO - Report generated: /Users/dalemarana/Documents/code_projects/python/HomeBuyingApp/home_buying_app/Reports/Marana_2025-02-21_Report8.pdf
+2025-03-03 17:49:11,514 - INFO - User input files loaded successfully.
+2025-03-03 17:49:32,384 - INFO - Processing complete.
+2025-03-03 17:49:32,684 - INFO - Expense analysis graphs generated successfully!
+2025-03-03 17:49:32,804 - INFO - Non-recoverable costs graph generated successfully!
+2025-03-03 17:49:32,891 - INFO - Opportunity Costs graph generated successfully!
+2025-03-03 17:49:33,960 - INFO - Summary graph generated successfully!
+2025-03-03 17:49:34,362 - INFO - Report generated: /Users/dalemarana/Documents/code_projects/python/HomeBuyingApp/home_buying_app/Reports/Doe_2025-03-03_Report9.pdf

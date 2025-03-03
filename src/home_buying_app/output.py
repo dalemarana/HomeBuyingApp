@@ -138,7 +138,7 @@ def generate_pdf_report(data):
     """Creates a well structured PDF Report."""
 
     try:
-        # print(data)
+        print(data)
         # Report Name
         name = data["user_details"][0]["name"]
         last_name = name.split()[-1]
