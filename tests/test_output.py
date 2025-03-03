@@ -1,11 +1,12 @@
 import os
 import pytest
+
 # Skip output tests in CI/CD
-# if os.environ.get("CI"):  # GitHub Actions sets the "CI" environment variable
-#     pytest.skip("Skipping GUI tests in CI/CD", allow_module_level=True)
+if os.environ.get("CI"):  # GitHub Actions sets the "CI" environment variable
+    pytest.skip("Skipping GUI tests in CI/CD", allow_module_level=True)
 
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from output import generate_conclusion, generate_conclusion_graphs, comma_formatter
 
 @pytest.fixture
@@ -54,18 +55,16 @@ def test_generate_conclusion(sample_data):
     assert "Recommendation:" in result
 
 
+def test_generate_conclusion_graphs(sample_data, sample_conclusion_data, tmp_path):
+    """Test the generate_conclusion_graphs function."""
+    summary_graph_path = tmp_path / "summary_graph.png"
 
-# @pytest.mark.skipif(os.getenv('CI') == 'true', reason="Skipping graph generation test on GitHub CI")
-# def test_generate_conclusion_graphs(sample_data, sample_conclusion_data, tmp_path):
-#     """Test the generate_conclusion_graphs function."""
-#     summary_graph_path = tmp_path / "summary_graph.png"
+    plt.savefig = lambda *args, **kwargs: summary_graph_path.touch()  # Mock savefig
 
-#     plt.savefig = lambda *args, **kwargs: summary_graph_path.touch()  # Mock savefig
+    result_path = generate_conclusion_graphs(sample_data, sample_conclusion_data)
 
-#     result_path = generate_conclusion_graphs(sample_data, sample_conclusion_data)
-
-#     assert result_path is not None
-#     assert summary_graph_path.exists()  # Ensure the file was "saved"
+    assert result_path is not None
+    assert summary_graph_path.exists()  # Ensure the file was "saved"
 
 # def test_comma_formatter():
 #     """Test the comma_formatter function."""
