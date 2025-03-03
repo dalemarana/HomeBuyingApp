@@ -64,8 +64,13 @@ def test_gui_initialization(gui_app, prefilled_data):
     print("✅ GUI initialization test passed!")
 
 
-def navigate_to_tab(gui_app, target_tab_index):
+def navigate_to_tab(gui_app, target_tab_index, prefilled_data):
     """Helper function to navigate through tabs using the 'Next' button."""
+    for key, expected_value in prefilled_data.items():
+        assert key in gui_app.AllKeysDict.keys(), f"❌ Expected input field '{key}' not found in GUI!"
+        # Set pre-filled values manually to ensure they exist
+        gui_app[key].update(expected_value)
+
     current_tab = int(gui_app["TabGroup"].get().replace("-TAB", "").replace("-", ""))  # Get current tab number
 
     assert "Next" in gui_app.AllKeysDict, "❌ 'Next' button not found in the GUI!"
@@ -76,10 +81,10 @@ def navigate_to_tab(gui_app, target_tab_index):
 
     while current_tab < target_tab_index:
         print(f"🖱️ Clicking 'Next' button (Current: -TAB{current_tab}-)...")
-        gui_app["Next"].click()  # Click "Next" button
+        # gui_app["Next"].click()  # Click "Next" button
         # gui_app.write_event_value("Next", None)
-        # gui_app["Next"].Widget.invoke()
-        time.sleep(0.2)  # Allow GUI time to process transition
+        gui_app["Next"].Widget.invoke()
+        time.sleep(0.5)  # Allow GUI time to process transition
         # event, _ = gui_app.read(timeout=500)
         while True:
             event, _ = gui_app.read(timeout=500)
@@ -90,10 +95,10 @@ def navigate_to_tab(gui_app, target_tab_index):
         gui_app.refresh()  # Ensure UI updates
 
         print(f"📍 After click: Current tab = {current_tab}")
-        current_tab += 1  # Move to the next tab
         current_tab_name = gui_app['TabGroup'].get()
-        print(f"📍 After click: Current tab = {current_tab_name}")  # Debugging
+        print(f"📍 After click: Current tab (actual) = {current_tab_name}")  # Debugging
         print(current_tab_name, f"-TAB{current_tab}-")
+        current_tab += 1  # Move to the next tab
         if current_tab_name != f"-TAB{current_tab}-":
             print(f"✅ Tab changed to {current_tab_name}!")
         else:
@@ -107,9 +112,9 @@ def navigate_to_tab(gui_app, target_tab_index):
 
 
 @pytest.mark.parametrize("tab_index", range(2, 7))  # Test Tabs 2-6
-def test_button_next_tab(gui_app, tab_index):
+def test_button_next_tab(gui_app, tab_index, prefilled_data):
     """✅ Test if 'Next' button navigates through all tabs correctly."""
-    navigate_to_tab(gui_app, tab_index)
+    navigate_to_tab(gui_app, tab_index, prefilled_data)
 
 
 # @pytest.mark.parametrize("tab_index", range(2, 6))  # Start from Tab 2 (since Tab 1 is open by default)

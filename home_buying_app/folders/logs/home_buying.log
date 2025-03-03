@@ -48,3 +48,24 @@
 2025-02-20 11:35:05,906 - INFO - User input files loaded successfully.
 2025-02-20 15:06:46,386 - INFO - User input files loaded successfully.
 2025-02-20 15:21:41,537 - INFO - User input files loaded successfully.
+2025-02-21 09:00:21,286 - INFO - User input files loaded successfully.
+2025-02-21 09:00:28,245 - INFO - Processing complete.
+2025-02-21 09:00:28,510 - INFO - Expense analysis graphs generated successfully!
+2025-02-21 09:00:28,646 - INFO - Non-recoverable costs graph generated successfully!
+2025-02-21 09:00:28,736 - INFO - Opportunity Costs graph generated successfully!
+2025-02-21 09:00:29,759 - INFO - Summary graph generated successfully!
+2025-02-21 09:00:30,173 - INFO - Report generated: /Users/dalemarana/Documents/code_projects/python/HomeBuyingApp/home_buying_app/Reports/Doe_2025-02-21_Report6.pdf
+2025-02-21 10:26:40,130 - INFO - User input files loaded successfully.
+2025-02-21 10:27:15,009 - INFO - Processing complete.
+2025-02-21 10:27:15,369 - INFO - Expense analysis graphs generated successfully!
+2025-02-21 10:27:15,496 - INFO - Non-recoverable costs graph generated successfully!
+2025-02-21 10:27:15,588 - INFO - Opportunity Costs graph generated successfully!
+2025-02-21 10:27:16,565 - INFO - Summary graph generated successfully!
+2025-02-21 10:27:16,891 - INFO - Report generated: /Users/dalemarana/Documents/code_projects/python/HomeBuyingApp/home_buying_app/Reports/Marana_2025-02-21_Report7.pdf
+2025-02-21 10:27:56,321 - INFO - User input files loaded successfully.
+2025-02-21 10:28:32,722 - INFO - Processing complete.
+2025-02-21 10:28:32,993 - INFO - Expense analysis graphs generated successfully!
+2025-02-21 10:28:33,116 - INFO - Non-recoverable costs graph generated successfully!
+2025-02-21 10:28:33,203 - INFO - Opportunity Costs graph generated successfully!
+2025-02-21 10:28:34,189 - INFO - Summary graph generated successfully!
+2025-02-21 10:28:34,539 - INFO - Report generated: /Users/dalemarana/Documents/code_projects/python/HomeBuyingApp/home_buying_app/Reports/Marana_2025-02-21_Report8.pdf
