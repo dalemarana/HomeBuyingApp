@@ -138,7 +138,7 @@ def generate_pdf_report(data):
     """Creates a well structured PDF Report."""
 
     try:
-        print(data)
+        # print(data)
         # Report Name
         name = data["user_details"][0]["name"]
         last_name = name.split()[-1]
@@ -538,8 +538,8 @@ def generate_conclusion(data):
         conclusion.append(f"Homeownership provides better spending space with accummulated present value spending space difference of {currency} {abs(remaining_income_difference):,.2f}.")
 
     # Non-Recoverable Cost Analysis
-    homeownership_costs = data["non_recoverable_costs"][0]["homeownership_costs"]
-    renting_costs = data["non_recoverable_costs"][0]["renting_costs"]
+    # homeownership_costs = data["non_recoverable_costs"][0]["homeownership_costs"]
+    # renting_costs = data["non_recoverable_costs"][0]["renting_costs"]
     nonrecoverable_cost_difference = data["non_recoverable_costs"][0]["nonrecoverable_cost_difference"]
 
     conclusion.append("\n\nNon-Recoverable Costs:")
@@ -549,8 +549,8 @@ def generate_conclusion(data):
         conclusion.append(f"Homeownership is more cost-effective over the analysis period, with a present value savings of {currency} {abs(nonrecoverable_cost_difference):,.2f}.")
 
     # Opportunity Cost Analysis
-    home_equity_growth = data["opportunity_costs"][0]["home_equity_growth"]
-    stock_investment_growth = data["opportunity_costs"][0]["stock_investment_growth"]
+    # home_equity_growth = data["opportunity_costs"][0]["home_equity_growth"]
+    # stock_investment_growth = data["opportunity_costs"][0]["stock_investment_growth"]
     opportunity_cost_difference = data["opportunity_costs"][0]["opportunity_cost_difference"]
 
     conclusion.append("\n\nOpportunity Costs:")

@@ -36,17 +36,17 @@ def sample_conclusion_data():
         "Opportunity Costs": [291713.1672005757, 322159.3636797702]
     }
 
-# def test_generate_conclusion(sample_data):
-#     """Test the generate_conclusion function."""
-#     result = generate_conclusion(sample_data)
+def test_generate_conclusion(sample_data):
+    """Test the generate_conclusion function."""
+    result = generate_conclusion(sample_data)
 
-#     assert "Expense Analysis:" in result
-#     assert "Homeownership provides better spending space with accummulated present value spending space difference of GBP 161,559.35." in result
-#     assert "Non-Recoverable Costs:" in result
-#     assert "Homeownership is more cost-effective over the analysis period, with a present value savings of GBP 371,821.52." in result
-#     assert "Opportunity Costs:" in result
-#     assert "Investing in homeownership offers better financial growth, with a present value advantage of GBP 30,446.20." in result
-#     assert "Recommendation:" in result
+    assert "Expense Analysis:" in result
+    assert "Homeownership provides better spending space with accummulated present value spending space difference of GBP 161,559.35." in result
+    assert "Non-Recoverable Costs:" in result
+    assert "Homeownership is more cost-effective over the analysis period, with a present value savings of GBP 371,821.52." in result
+    assert "Opportunity Costs:" in result
+    assert "Homeownership equity growth outperforms stock investments, with a present value advantage of GBP 30,446.20." in result
+    assert "Recommendation:" in result
 
 def test_generate_conclusion_graphs(sample_data, sample_conclusion_data, tmp_path):
     """Test the generate_conclusion_graphs function."""
