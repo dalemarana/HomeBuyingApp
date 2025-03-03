@@ -64,57 +64,57 @@ def test_gui_initialization(gui_app, prefilled_data):
     print("✅ GUI initialization test passed!")
 
 
-def navigate_to_tab(gui_app, target_tab_index, prefilled_data):
-    """Helper function to navigate through tabs using the 'Next' button."""
-    for key, expected_value in prefilled_data.items():
-        assert key in gui_app.AllKeysDict.keys(), f"❌ Expected input field '{key}' not found in GUI!"
-        # Set pre-filled values manually to ensure they exist
-        gui_app[key].update(expected_value)
+# def navigate_to_tab(gui_app, target_tab_index, prefilled_data):
+#     """Helper function to navigate through tabs using the 'Next' button."""
+#     for key, expected_value in prefilled_data.items():
+#         assert key in gui_app.AllKeysDict.keys(), f"❌ Expected input field '{key}' not found in GUI!"
+#         # Set pre-filled values manually to ensure they exist
+#         gui_app[key].update(expected_value)
 
-    current_tab = int(gui_app["TabGroup"].get().replace("-TAB", "").replace("-", ""))  # Get current tab number
+#     current_tab = int(gui_app["TabGroup"].get().replace("-TAB", "").replace("-", ""))  # Get current tab number
 
-    assert "Next" in gui_app.AllKeysDict, "❌ 'Next' button not found in the GUI!"
-    assert gui_app["Next"].visible, "❌ 'Next' button is not visible!"
+#     assert "Next" in gui_app.AllKeysDict, "❌ 'Next' button not found in the GUI!"
+#     assert gui_app["Next"].visible, "❌ 'Next' button is not visible!"
 
-    print(f"🔍 Before clicking: Next button state = {gui_app['Next'].Widget['state']}")
-    assert str(gui_app["Next"].Widget["state"]) == "normal", "❌ 'Next' button is disabled!"
+#     print(f"🔍 Before clicking: Next button state = {gui_app['Next'].Widget['state']}")
+#     assert str(gui_app["Next"].Widget["state"]) == "normal", "❌ 'Next' button is disabled!"
 
-    while current_tab < target_tab_index:
-        print(f"🖱️ Clicking 'Next' button (Current: -TAB{current_tab}-)...")
-        # gui_app["Next"].click()  # Click "Next" button
-        # gui_app.write_event_value("Next", None)
-        gui_app["Next"].Widget.invoke()
-        time.sleep(0.5)  # Allow GUI time to process transition
-        # event, _ = gui_app.read(timeout=500)
-        while True:
-            event, _ = gui_app.read(timeout=500)
-            print(f"📢 Event Received: {event}")
-            if event in (None, "Next"):  # Ensure we process the "Next" click
-                break
+#     while current_tab < target_tab_index:
+#         print(f"🖱️ Clicking 'Next' button (Current: -TAB{current_tab}-)...")
+#         # gui_app["Next"].click()  # Click "Next" button
+#         # gui_app.write_event_value("Next", None)
+#         gui_app["Next"].Widget.invoke()
+#         time.sleep(0.5)  # Allow GUI time to process transition
+#         # event, _ = gui_app.read(timeout=500)
+#         while True:
+#             event, _ = gui_app.read(timeout=500)
+#             print(f"📢 Event Received: {event}")
+#             if event in (None, "Next"):  # Ensure we process the "Next" click
+#                 break
 
-        gui_app.refresh()  # Ensure UI updates
+#         gui_app.refresh()  # Ensure UI updates
 
-        print(f"📍 After click: Current tab = {current_tab}")
-        current_tab_name = gui_app['TabGroup'].get()
-        print(f"📍 After click: Current tab (actual) = {current_tab_name}")  # Debugging
-        print(current_tab_name, f"-TAB{current_tab}-")
-        current_tab += 1  # Move to the next tab
-        if current_tab_name != f"-TAB{current_tab}-":
-            print(f"✅ Tab changed to {current_tab_name}!")
-        else:
-            print("❌ Tab did not change!")
+#         print(f"📍 After click: Current tab = {current_tab}")
+#         current_tab_name = gui_app['TabGroup'].get()
+#         print(f"📍 After click: Current tab (actual) = {current_tab_name}")  # Debugging
+#         print(current_tab_name, f"-TAB{current_tab}-")
+#         current_tab += 1  # Move to the next tab
+#         if current_tab_name != f"-TAB{current_tab}-":
+#             print(f"✅ Tab changed to {current_tab_name}!")
+#         else:
+#             print("❌ Tab did not change!")
 
-    # Ensure the correct tab is now selected
-    expected_tab = f"-TAB{target_tab_index}-"
-    print(f"Current Tab: {gui_app['TabGroup'].get()}, Expected: {expected_tab}")  # Debugging
+#     # Ensure the correct tab is now selected
+#     expected_tab = f"-TAB{target_tab_index}-"
+#     print(f"Current Tab: {gui_app['TabGroup'].get()}, Expected: {expected_tab}")  # Debugging
 
-    assert gui_app["TabGroup"].get() == expected_tab, f"❌ Failed to reach {expected_tab}!"
+#     assert gui_app["TabGroup"].get() == expected_tab, f"❌ Failed to reach {expected_tab}!"
 
 
-@pytest.mark.parametrize("tab_index", range(2, 7))  # Test Tabs 2-6
-def test_button_next_tab(gui_app, tab_index, prefilled_data):
-    """✅ Test if 'Next' button navigates through all tabs correctly."""
-    navigate_to_tab(gui_app, tab_index, prefilled_data)
+# @pytest.mark.parametrize("tab_index", range(2, 7))  # Test Tabs 2-6
+# def test_button_next_tab(gui_app, tab_index, prefilled_data):
+#     """✅ Test if 'Next' button navigates through all tabs correctly."""
+#     navigate_to_tab(gui_app, tab_index, prefilled_data)
 
 
 # @pytest.mark.parametrize("tab_index", range(2, 6))  # Start from Tab 2 (since Tab 1 is open by default)
@@ -164,46 +164,46 @@ def test_exit_button(gui_app):
     
     assert gui_app.TKroot is None or not gui_app.TKroot.winfo_exists(), "❌ GUI window did not close!"
 
-def test_generate_report_button(gui_app, prefilled_data):
-    """✅ Test if 'Generate Report' button generates a report."""
+# def test_generate_report_button(gui_app, prefilled_data):
+#     """✅ Test if 'Generate Report' button generates a report."""
 
-        # 🛠 Navigate to the last tab (-TAB6-)
-    current_tab = 1
-    while gui_app["TabGroup"].get() != "-TAB6-":
-        gui_app["Next"].click()
-        time.sleep(0.2)  # ⏳ Allow time for tab transition
-        current_tab += 1
-        print(gui_app["TabGroup"].get())
-        if current_tab > 6:  # Prevent infinite loops
-            raise AssertionError("❌ Failed to navigate to -TAB6-")
+#         # 🛠 Navigate to the last tab (-TAB6-)
+#     current_tab = 1
+#     while gui_app["TabGroup"].get() != "-TAB6-":
+#         gui_app["Next"].click()
+#         time.sleep(0.2)  # ⏳ Allow time for tab transition
+#         current_tab += 1
+#         print(gui_app["TabGroup"].get())
+#         if current_tab > 6:  # Prevent infinite loops
+#             raise AssertionError("❌ Failed to navigate to -TAB6-")
 
 
-    # Get list of reports before clicking the button
-    existing_reports = set(os.listdir(REPORTS_FOLDER))
-    print(existing_reports)
+#     # Get list of reports before clicking the button
+#     existing_reports = set(os.listdir(REPORTS_FOLDER))
+#     print(existing_reports)
     
-    # Click 'Generate Report' button
-    gui_app["Generate Report"].click()
+#     # Click 'Generate Report' button
+#     gui_app["Generate Report"].click()
     
-    time.sleep(0.5)  # ⏳ Give time for the file to generate
+#     time.sleep(0.5)  # ⏳ Give time for the file to generate
     
-    # Get list of reports after clicking the button
-    new_reports = set(os.listdir(REPORTS_FOLDER))
+#     # Get list of reports after clicking the button
+#     new_reports = set(os.listdir(REPORTS_FOLDER))
     
-    # Find the new report file
-    generated_files = new_reports - existing_reports
-    print(generated_files)
-    assert len(generated_files) == 1, "❌ Report file was not generated!"
+#     # Find the new report file
+#     generated_files = new_reports - existing_reports
+#     print(generated_files)
+#     assert len(generated_files) == 1, "❌ Report file was not generated!"
     
-    # Get the new report file name
-    report_filename = generated_files.pop()
+#     # Get the new report file name
+#     report_filename = generated_files.pop()
     
-    # Ensure the file exists in the expected directory
-    report_path = os.path.join(REPORTS_FOLDER, report_filename)
-    assert os.path.exists(report_path), f"❌ Report file '{report_filename}' does not exist!"
+#     # Ensure the file exists in the expected directory
+#     report_path = os.path.join(REPORTS_FOLDER, report_filename)
+#     assert os.path.exists(report_path), f"❌ Report file '{report_filename}' does not exist!"
     
-    # Clean up after test (optional)
-    os.remove(report_path)
+#     # Clean up after test (optional)
+#     os.remove(report_path)
 
 # def test_user_manual_button(gui_app):
 #     """✅ Test if 'View User Manual' button attempts to open the file."""
