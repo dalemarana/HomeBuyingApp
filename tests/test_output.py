@@ -1,4 +1,8 @@
 import pytest
+# Skip output tests in CI/CD
+if os.environ.get("CI"):  # GitHub Actions sets the "CI" environment variable
+    pytest.skip("Skipping GUI tests in CI/CD", allow_module_level=True)
+
 import numpy as np
 import os
 import matplotlib.pyplot as plt
