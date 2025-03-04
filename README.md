@@ -42,7 +42,7 @@ deposit = 50000
 rate = 4.5
 years = 30
 
-monthly_payment = calculate_mortgage(loan_amount, deposit, rate, years)
+monthly_payment = calculate_mortgage_payment(loan_amount, deposit, rate, years)
 print(f"Monthly Payment: {monthly_payment}")
 
 
