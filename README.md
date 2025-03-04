@@ -14,21 +14,39 @@ The Home Buying Analysis Tool is a comprehensive financial analysis program desi
 - **Detailed Conclusion:** The tool generates a clear, data-driven summary to assist decision-making.
 
 ## How to Use
-1. Clone the repository to your local machine:
-   ```sh
-   git clone https://github.com/your-repo/home-buying-analysis.git
-   cd home-buying-analysis
-   ```
-2. Install the required dependencies:
-   ```sh
-   pip install -r requirements.txt
-   ```
-3. Run the main script to analyze financial outcomes:
-   ```sh
-   python main.py
-   ```
-4. Modify `config.json` (if applicable) to customize inputs such as income, rent, mortgage details, and investment growth rates.
-5. View the generated financial report and conclusions.
+A) Using the GUI
+	1.	Ensure you have all dependencies installed:
+```
+pip install -r requirements.txt
+```
+
+	2.	Run the application:
+```
+python main.py
+```
+
+	3.	The graphical interface will open, allowing you to input data and generate results.
+
+B) Importing processing.py for Custom Use
+
+Developers can integrate the core logic into their own applications by importing processing.py. Example:
+```
+from processing import calculate_mortgage, analyze_expenses
+
+# Example usage:
+loan_amount = 250000
+rate = 4.5
+years = 30
+
+monthly_payment = calculate_mortgage(loan_amount, rate, years)
+print(f"Monthly Payment: {monthly_payment}")
+
+# Example expense analysis
+data = load_config()  # Load configurations if needed
+analysis = analyze_expenses(data)
+print(analysis)
+```
+4. View the generated financial report and conclusions.
 
 ## Questions and Comments
 For any inquiries, suggestions, or issues, please contact us via email:
