@@ -15,17 +15,18 @@ The Home Buying Analysis Tool is a comprehensive financial analysis program desi
 
 ## How to Use
 **A) Using the GUI**
+
 	1.	Ensure you have all dependencies installed:
+    
 ``` python
 pip install -r requirements.txt
 ```
 
-	2.	Run the application:
+	2.	Then run the application, and the graphical interface will open, allowing you to input data and generate results:
+
 ``` python
 python main.py
 ```
-
-	3.	The graphical interface will open, allowing you to input data and generate results.
 
 **B) Importing processing.py for Custom Use**
 
