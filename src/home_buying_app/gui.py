@@ -275,8 +275,7 @@ class HomeBuyingAnalysis:
 
         self.window.close()
 
-
-if __name__ == "__main__":
+def run():
     app = HomeBuyingAnalysis()
     app.read_input_files()
     # app.create_gui()
