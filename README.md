@@ -23,6 +23,8 @@ pip install git+https://github.com/dalemarana/HomeBuyingApp.git
 ## How to Use
 **A) Using the GUI**
 
+Note: You need your own account for pySimpleGUI. Visit https://PySimpleGUI.net for more details
+
 	1.	Ensure you have all dependencies installed:
     
 ``` python
