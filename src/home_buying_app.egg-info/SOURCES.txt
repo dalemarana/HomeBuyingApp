@@ -8,6 +8,7 @@ src/home_buying_app/config.py
 src/home_buying_app/content.py
 src/home_buying_app/decision.py
 src/home_buying_app/gui.py
+src/home_buying_app/main.py
 src/home_buying_app/output.py
 src/home_buying_app/processing.py
 src/home_buying_app/py.typed
@@ -19,3 +20,5 @@ src/home_buying_app.egg-info/requires.txt
 src/home_buying_app.egg-info/top_level.txt
 tests/test_decision.py
 tests/test_gui.py
+tests/test_output.py
+tests/test_processing.py
