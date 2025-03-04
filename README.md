@@ -74,5 +74,5 @@ filename = generate_graphs_and_report(processed_data)
 
 ## Questions and Comments
 For any inquiries, suggestions, or issues, please contact us via email:
-📧 **support@homebuyingtool.com**
+📧 **dalemarana@gmail.com**
 
