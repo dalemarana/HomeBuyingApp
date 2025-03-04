@@ -15,6 +15,9 @@ packages = [
     { include = "home_buying_app", from = "src" }
 ]
 
+[tool.poetry.include]
+"src/home_buying_app/extras/country_data.py" = "home_buying_app/extras/country_data.py"
+
 [tool.mypy]
 mypy_path = "src"
 check_untyped_defs = true

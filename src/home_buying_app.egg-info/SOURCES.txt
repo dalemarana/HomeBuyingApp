@@ -1,4 +1,5 @@
 LICENSE
+MANIFEST.in
 README.md
 pyproject.toml
 setup.cfg
@@ -18,6 +19,8 @@ src/home_buying_app.egg-info/dependency_links.txt
 src/home_buying_app.egg-info/not-zip-safe
 src/home_buying_app.egg-info/requires.txt
 src/home_buying_app.egg-info/top_level.txt
+src/home_buying_app/extras/__init__.py
+src/home_buying_app/extras/country_data.py
 tests/test_decision.py
 tests/test_gui.py
 tests/test_output.py

@@ -13,6 +13,13 @@ The Home Buying Analysis Tool is a comprehensive financial analysis program desi
 - **Customizable Inputs:** Users can adjust income growth, property value appreciation, mortgage rates, and other economic variables.
 - **Detailed Conclusion:** The tool generates a clear, data-driven summary to assist decision-making.
 
+## Getting the code
+**Get the package using below command**
+
+```
+pip install git+https://github.com/dalemarana/HomeBuyingApp.git
+```
+
 ## How to Use
 **A) Using the GUI**
 
