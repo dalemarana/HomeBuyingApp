@@ -1,6 +1,9 @@
 import os
 import pytest
 
+# Skip output tests in CI/CD
+if os.environ.get("CI"):  # GitHub Actions sets the "CI" environment variable
+    pytest.skip("Skipping GUI tests in CI/CD", allow_module_level=True)
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -51,12 +54,13 @@ def test_generate_conclusion(sample_data):
     assert "Homeownership equity growth outperforms stock investments, with a present value advantage of GBP 30,446.20." in result
     assert "Recommendation:" in result
 
-# Skip output tests in CI/CD
-if os.environ.get("CI"):  # GitHub Actions sets the "CI" environment variable
-    pytest.skip("Skipping GUI tests in CI/CD", allow_module_level=True)
 
 def test_generate_conclusion_graphs(sample_data, sample_conclusion_data, tmp_path):
     """Test the generate_conclusion_graphs function."""
+
+    if os.environ.get("CI"):  # GitHub Actions sets the "CI" environment variable
+        pytest.skip("Skipping GUI tests in CI/CD")
+        
     summary_graph_path = tmp_path / "summary_graph.png"
 
     plt.savefig = lambda *args, **kwargs: summary_graph_path.touch()  # Mock savefig
