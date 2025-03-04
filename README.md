@@ -29,7 +29,8 @@ python main.py
 
 B) Importing processing.py for Custom Use
 
-Developers can integrate the core logic into their own applications by importing processing.py. Example:
+Developers can integrate the core logic into their own applications by importing processing.py. 
+Example:
 ```
 from processing import calculate_mortgage, analyze_expenses
 
