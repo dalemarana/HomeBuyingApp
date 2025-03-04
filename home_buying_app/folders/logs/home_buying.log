@@ -90,3 +90,10 @@
 2025-03-04 10:43:42,371 - INFO - Opportunity Costs graph generated successfully!
 2025-03-04 10:43:43,360 - INFO - Summary graph generated successfully!
 2025-03-04 10:43:43,662 - INFO - Report generated: /Users/dalemarana/Documents/code_projects/python/HomeBuyingApp/home_buying_app/Reports/Doe_2025-03-04_Report11.pdf
+2025-03-04 12:32:18,840 - INFO - User input files loaded successfully.
+2025-03-04 12:32:26,695 - INFO - Processing complete.
+2025-03-04 12:32:26,985 - INFO - Expense analysis graphs generated successfully!
+2025-03-04 12:32:27,127 - INFO - Non-recoverable costs graph generated successfully!
+2025-03-04 12:32:27,233 - INFO - Opportunity Costs graph generated successfully!
+2025-03-04 12:32:28,254 - INFO - Summary graph generated successfully!
+2025-03-04 12:32:28,703 - INFO - Report generated: /Users/dalemarana/Documents/code_projects/python/HomeBuyingApp/home_buying_app/Reports/Doe_2025-03-04_Report12.pdf
