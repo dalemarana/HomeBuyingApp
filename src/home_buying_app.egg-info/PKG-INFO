@@ -45,7 +45,7 @@ Requires-Dist: pillow==11.1.0
 Requires-Dist: pluggy==1.5.0
 Requires-Dist: pyasn1==0.6.1
 Requires-Dist: pyparsing==3.2.1
-Requires-Dist: PySimpleGUI==5.0.0.16
+Requires-Dist: PySimpleGUI==5.0.9
 Requires-Dist: pytest==8.3.4
 Requires-Dist: pytest-cov==6.0.0
 Requires-Dist: python-dateutil==2.9.0.post0
@@ -102,7 +102,7 @@ pip install -r requirements.txt
 	2.	Then run the application, and the graphical interface will open, allowing you to input data and generate results:
 
 ``` python
-python main.py
+home_buying_app 
 ```
 
 **B) Importing processing.py for Custom Use**
