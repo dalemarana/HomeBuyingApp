@@ -34,7 +34,7 @@ pip install -r requirements.txt
 	2.	Then run the application, and the graphical interface will open, allowing you to input data and generate results:
 
 ``` python
-python main.py
+home_buying_app 
 ```
 
 **B) Importing processing.py for Custom Use**

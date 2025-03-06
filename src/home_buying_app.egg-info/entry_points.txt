@@ -1,0 +1,2 @@
+[console_scripts]
+home_buying_app = home_buying_app.gui:run
