@@ -16,6 +16,7 @@ src/home_buying_app/py.typed
 src/home_buying_app.egg-info/PKG-INFO
 src/home_buying_app.egg-info/SOURCES.txt
 src/home_buying_app.egg-info/dependency_links.txt
+src/home_buying_app.egg-info/entry_points.txt
 src/home_buying_app.egg-info/not-zip-safe
 src/home_buying_app.egg-info/requires.txt
 src/home_buying_app.egg-info/top_level.txt

@@ -23,7 +23,7 @@ pip install git+https://github.com/dalemarana/HomeBuyingApp.git
 ## How to Use
 **A) Using the GUI**
 
-**Note:** You need your own account for pySimpleGUI. Visit https://PySimpleGUI.net for more details
+> [!NOTE] You need your own account for pySimpleGUI. Visit https://PySimpleGUI.net for more details
 
 	1.	Ensure you have all dependencies installed:
     
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 	2.	Then run the application, and the graphical interface will open, allowing you to input data and generate results:
 
 ``` python
-python main.py
+home_buying_app 
 ```
 
 **B) Importing processing.py for Custom Use**
@@ -83,5 +83,5 @@ filename = generate_graphs_and_report(processed_data)
 
 ## Questions and Comments
 For any inquiries, suggestions, or issues, please contact us via email:
-📧 **dalemarana@gmail.com**
+📧 **dalemarana.edu@gmail.com**
 
